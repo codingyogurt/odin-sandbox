@@ -1,1 +1,1 @@
-### My The Odin Project Curicculum Sandbox
+### My The Odin Project Curicculum Sandboxes
