@@ -10,6 +10,8 @@ inputAdd7.onchange = function(){
     }
 }
 
+// comment
+
 const inputMultiply = document.querySelector("#input-multiply");
 const resultMultiply = document.querySelector("#result-multiply");
 
