@@ -1,115 +1,62 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Rock, Paper, and Scissors Game</title>
+        <link rel="stylesheet" href="/index.css">
+        <script src="https://kit.fontawesome.com/a0a1699ca0.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
     </head>
     <body>
-        
-        <script>
+        <div class="container">
+            <h1>Rock, Paper, and Scissors Tournament</h1>
+            <div class="scoreboard">
+                <h2>Score Board</h2>
+                <div class="score computer">
+                    <i class="fas fa-user"></i>
+                    <span class="human-score">0</span>
+                </div>
+                <div class="score human">
+                    <i class="fas fa-robot"></i>
+                    <span class="computer-score">0</span>
+                </div>
+            </div>
 
-            // 0 = draw
-            // 1 = computer wins
-            // 2 = human wins
-
-            let isHumanWin = 0;
-            let compScore = 0;
-            let humanScore = 0;
-
-            function computerPlay(){
-                return Math.floor(Math.random() * 3);
-            }
-
-            function whoWins(computerPlay, humanPlay){
-                // 0 = Rock
-                // 1 = Paper
-                // 2 = Scissors
-
-                isHumanWin = 1;
-
-                console.log("Computer: " + toStrokeText(computerPlay) + " , " 
-                        + "Human: " + toStrokeText(humanPlay));
+            <div class="result">
+                Click a hand below!
+            </div>
+    
+            <div class="computer-user">
+                <i class="fas fa-robot"></i>
+                <p>Mr. Computer</p>
+            </div>
+    
+            <div class="computer-buttons">
+                <i class="far fa-hand-scissors"></i>
+            </div>
                 
-                if (computerPlay === humanPlay){
-                    isHumanWin = 0;
-                    return "Draw!";
-                };
+            <div class="human-buttons">
 
-                if (computerPlay === 0 && humanPlay === 2){
-                    return "You lose! Rock beats Scissors!";
-                } else if (computerPlay === 1 && humanPlay === 0){
-                    return "You lose! Paper beats Rock!";
-                } else if (computerPlay === 2 && humanPlay === 1){
-                    return "You lose! Scissors beats Paper!";
-                } else {
-                    isHumanWin = 2;
-                    return "You win!";
-                }
-            }
+                <div class="btn human-rock">
+                    <i class="far fa-hand-rock"></i>
+                    <p>Rock</p>
+                </div>
+                <div class="btn human-paper">
+                    <i class="far fa-hand-paper"></i>
+                    <p>Paper</p>
+                </div>
+                <div class="btn human-scissors">
+                    <i class="far fa-hand-scissors"></i>
+                    <p>Scissors</p>
+                </div>
+    
+            </div>
 
-            function game(){
-                const matchesLimit = 5;
-                let i = 0;
+            <div class="human-user">
+                <i class="fas fa-user"></i>
+                <p>Mr. Human</p>
+            </div>
+        </div>
 
-                while(i < matchesLimit){
-                    let humanInput = prompt("Enter your bet!: ");
-                    if (!isNaN(humanInput)){
-                        console.log("Please enter either: Rock, Paper, or Scissors x");
-                    } else {
-                        humanInput = humanInput.toLowerCase();
-                        if(toStroke(humanInput) !== -1){
-                            console.log(whoWins(computerPlay(),toStroke(humanInput)));
-                            updateScore();
-                            i++;
-                        } else {
-                            console.log("Please enter either: Rock, Paper, or Scissors");
-                        }
-                    }
-                }
-
-                console.log("Computer: " + compScore + " "
-                    + "Human: " + humanScore);
-
-                if (compScore > humanScore){
-                    console.log("COMPUTER WINS!");
-                } else if (humanScore > compScore){
-                    console.log("HUMAN WINS!");
-                } else {
-                    console.log("IT'S A DRAW!");
-                }
-            }
-
-            function toStroke(humanInputText){
-                if(humanInputText == "rock"){
-                    return 0;
-                } else if (humanInputText == "paper"){
-                    return 1;
-                } else if (humanInputText == "scissors"){
-                    return 2;
-                } else {
-                    return -1;
-                }
-            }
-
-            function toStrokeText(strokeNum){
-                if (strokeNum === 0){
-                    return "Rock";
-                } else if (strokeNum === 1){
-                    return "Paper";
-                } else if (strokeNum === 2){
-                    return "Scissors";
-                }
-            }
-
-            function updateScore(){
-                if (isHumanWin === 1){
-                    compScore++;
-                } else if(isHumanWin === 2){
-                    humanScore++;
-                }
-            }
-
-
-            game();
-        </script>
+        <script src="/index.js"></script>
     </body>
 </html>

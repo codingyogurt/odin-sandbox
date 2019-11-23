@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Righteous', cursive;
+}
+
+body, html{
+    height: 100%;
+}
+
+.container{
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://images.unsplash.com/photo-1563207153-f403bf289096?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80);
+}
+
+h1 {
+    text-align: center;
+    padding: 50px 0px 20px 0px;
+}
+
+h2{
+    margin-bottom: 10px;
+}
+
+.scoreboard{
+    margin: auto;
+    width: 20%;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 15px 30px;
+    background-color: rgba(195, 220, 50, 0.3);
+}
+
+.scoreboard i{
+    font-size: large;
+}
+
+.score{
+    display: inline;
+    padding: 10px;
+}
+
+.computer{
+    border-right: 2px solid black;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.computer-user i{
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.computer-buttons i{
+    font-size: 100px;
+}
+
+.computer-buttons{
+    margin: 30px 0px;
+}
+
+.human-buttons{
+    display: inline-flex;
+}
+
+.btn{
+    padding: 5px 35px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.btn:hover{
+    border: 1px solid yellow;
+}
+
+.btn i{
+    font-size: 30px;
+}
+
+.result{
+    margin: 10px;
+    font-size: 20px;
+}
+
+.human-user i{
+    font-size: 50px;
+    margin-top: 10px;
+}
+
