@@ -6,11 +6,12 @@
 
 body {
     text-align: center;
-    background-image: url("https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-color: #404040;
 }
 
 header{
     margin-top: 30px;
+    color: white;
 }
 
 .buttons{
@@ -33,12 +34,24 @@ button:hover{
 }
 
 .container{
-    width: 70%;
-    height: 500px;
+    width: 625px;
+    height: 625px;
     margin: auto;
     background-color: aquamarine;
     margin-top: 10px;
+    display: grid;
 }
 
+.pixel{
+    background-color: teal;
+    border: #808080 1px solid;
+}
+
+.footer{
+    margin-top: 15px;
+    margin-bottom: 30pxw;
+    color: white;
+    font-size: 9px;
+}
 
 
