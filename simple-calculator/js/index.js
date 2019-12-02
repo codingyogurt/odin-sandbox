@@ -82,7 +82,6 @@ const backSpace = () => {
 
     equationText.textContent = text;
 
-
     if(equationText.textContent === ""){
         equationText.textContent = "0";
         resultText.textContent = "0";
@@ -100,6 +99,15 @@ const parseProblem = ((stringProblem) => {
     let endText = stringProblem.substr(stringProblem.length - 2, 2);
     if(checkIfOperator(endText)){
         return "OOPS!";
+    }
+
+    // check for dividing by 0
+    endText = stringProblem.substr(stringProblem.length - 3, 3);
+    if(endText.indexOf("/") >= 0){
+        endText = stringProblem.substr(stringProblem.length - 2, 2);
+        if(endText.indexOf("0") >= 0){
+            return "NOPE!";
+        }
     }
 
     const arrayProblem = stringProblem.split(" ");
