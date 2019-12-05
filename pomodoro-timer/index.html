@@ -1,52 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="index.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-        <title>Pomodoro Clock</title>
-    </head>
-    <body>
-        
-        <div class="container">
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+        integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Pomodoro Clock</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="start-scene fade">
             <div class="nav">
                 <button class="edit fas fa-pen"></button>
             </div>
-            <div class="start-scene">
-                <p>Pomodoro Clock</p>
-                <button class="play fas fa-play"></button>
-            </div>
-            <div class="main-scene">
-                <p class="session">Session</p>
-                <p class="timer">25:00</p>
-                <div class="controls">
-                    <button class="reset fas fa-undo-alt"></button>
-                    <button class="pause fas fa-pause"></button>
-                    <button class="stop fas fa-stop"></button>
-                </div>
-            </div>
-            <div class="settings-scene">
-                <p>Pomodoro Setup</p>
-                <span>Session</span>
-                <button class="session-minus fas fa-minus-circle"></button>
-                <span class="session-value"></span>
-                <button class="session-minus fas fa-plus-circle"></button>
-                
-                <span>Break</span>
-                <button class="break-minus fas fa-minus-circle"></button>
-                <span class="break-value"></span>
-                <button class="break-minus fas fa-plus-circle"></button>
+            <p>Pomodoro Clock</p>
+            <button class="play fas fa-play"></button>
+        </div>
 
-                <span>Rest</span>
-                <button class="rest-minus fas fa-minus-circle"></button>
-                <span class="rest-value"></span>
-                <button class="rest-minus fas fa-plus-circle"></button>
-                
+        <div class="main-scene">
+            <div class="nav">
+                <button class="edit fas fa-pen"></button>
+            </div>
+            <p class="title">Pomodoro Clock</p>
+            <p class="session">Session</p>
+            <p class="timer">25:00</p>
+            <div class="controls">
+                <button class="reset fas fa-undo-alt"></button>
+                <button class="pause fas fa-pause"></button>
+                <button class="stop fas fa-stop"></button>
+            </div>
+        </div>
+
+        <div class="settings-scene">
+            <div class="nav">
+                <button class="edit fas fa-pen"></button>
+            </div>
+            <p>Pomodoro Setup</p>
+
+            <div class="setting">
+                <span class="setting-title">Session</span>
+                <div class="setting-config">
+                    <button class="session-minus fas fa-minus-circle"></button>
+                    <span class="session-value">25</span>
+                    <button class="session-minus fas fa-plus-circle"></button>
+                </div>
+
+                <span class="setting-title">Session</span>
+                <div class="setting-config">
+                    <button class="session-minus fas fa-minus-circle"></button>
+                    <span class="session-value">25</span>
+                    <button class="session-minus fas fa-plus-circle"></button>
+                </div>
+
+                <span class="setting-title">Session</span>
+                <div class="setting-config">
+                    <button class="session-minus fas fa-minus-circle"></button>
+                    <span class="session-value">25</span>
+                    <button class="session-minus fas fa-plus-circle"></button>
+                </div>
+
             </div>
 
         </div>
 
+    </div>
 
-        <script src="index.js"></script>
-    </body>
+
+    <script src="index.js"></script>
+</body>
+
 </html>

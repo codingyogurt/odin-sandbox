@@ -48,11 +48,14 @@ button:focus{
     height: 422px;
     text-align: center;
     clear: both;
+    display: none;
+    transition: opacity 200ms ease;
 }
 
 .start-scene p{
     font-size: 20px;
-    margin-top: 90px;
+    text-align: center;
+    margin-top: 80px;
 }
 
 .play{
@@ -62,8 +65,79 @@ button:focus{
 
 .main-scene{
     display: none;
+    text-align: center;
+    transition: opacity 200ms ease;
+
+}
+
+.main-scene .title{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.session{
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.timer{
+    font-size: 60px;
+}
+
+.controls{
+    margin-top: 40px;
+    font-size: 70px;
+}
+
+.reset{
+    font-size: 24px;
+
+}
+
+.pause{
+    font-size: 45px;
+}
+
+.stop{
+    font-size: 24px;
 }
 
 .settings-scene{
+    transition: opacity 200ms ease;
     display: none;
+}
+
+.settings-scene p{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.setting{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto auto;
+    font-size: 22px;
+}
+
+.setting .fas{
+    font-size: 0.9em;
+}
+
+.setting-title{
+    margin-left: 39px;
+    margin-top: 28px;
+}
+
+.setting-config{
+    margin-top: 28px;
+    text-align: right;
+    margin-right: 33px;
+}
+
+.fade{
+    display: inherit;
 }
