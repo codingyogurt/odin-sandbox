@@ -7,12 +7,20 @@ const settingsBtnSettings = document.querySelector(".settings-scene .edit");
 const settingsBtnMain = document.querySelector(".main-scene .edit");
 const stopBtn = document.querySelector(".stop");
 const pauseBtn = document.querySelector(".pause");
+const resetBtn = document.querySelector(".reset");
 const adjustBtn = document.querySelector(".adjust");
-const sessionValue = document.querySelector(".session-value");
 const minusBtns = document.querySelectorAll(".minus");
 const plusBtns = document.querySelectorAll(".plus");
+let switchString = false;
+let switchPause = false;
+let currentSession = "";
 
-playBtn.addEventListener("click", showMain);
+playBtn.addEventListener("click", () => {
+    initTimerParam("session");
+    showMain();
+    timer.textContent = buildTimeString(minutes, 0);
+    startTimer();
+});
 
 settingsBtnStart.addEventListener("click", showSettings);
 
@@ -20,14 +28,37 @@ settingsBtnSettings.addEventListener("click", closeSettings);
 
 settingsBtnMain.addEventListener("click", showSettings);
 
-stopBtn.addEventListener("click", showStart);
-
-pauseBtn.addEventListener("click", (e) => {
-    e.target.classList.toggle("fa-pause");
-    e.target.classList.toggle("fa-play");
+stopBtn.addEventListener("click", () => {
+    showStart();
+    switchString = true;
 });
 
-adjustBtn.addEventListener("click", showStart);
+pauseBtn.addEventListener("click", (e) => {
+    const eClassList = e.target.classList;
+
+    eClassList.toggle("fa-pause");
+    eClassList.toggle("fa-play");
+
+    if (eClassList.contains("fa-pause")){
+        switchPause = true; // play
+        switchString = false;
+        startTimer();
+    } else if (eClassList.contains("fa-play")){
+        switchPause = false; // pause
+        switchString = true;
+    }
+    
+});
+
+resetBtn.addEventListener("click", () => {
+    initTimerParam(currentSession);
+    timer.textContent = buildTimeString(minutes, seconds = 0);
+});
+
+adjustBtn.addEventListener("click", () => {
+    showStart();
+    switchString = true;
+});
 
 minusBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -47,42 +78,99 @@ function showStart() {
     settingsScene.classList.remove("fade");
 }
 
-function showSettings(){
+function showSettings() {
     settingsScene.classList.add("fade");
 }
 
-function closeSettings(){
+function closeSettings() {
     settingsScene.classList.remove("fade");
 }
 
-function showMain(){
+function showMain() {
     mainScene.classList.add("fade");
     startScene.classList.remove("fade");
     settingsScene.classList.remove("fade");
 }
 
-function settingChangeValue(valueTarget, method){
+function settingChangeValue(valueTarget, method) {
     let currentValue = Number(valueTarget.textContent);
-    
-    if (currentValue < 25){        
-        if(method === "plus"){
+
+    if (currentValue < 25) {
+        if (method === "plus") {
             currentValue++;
             valueTarget.textContent = currentValue;
         }
     }
 
-    if (currentValue > 0){
-        if(method === "minus"){
+    if (currentValue > 0) {
+        if (method === "minus") {
             currentValue--;
             valueTarget.textContent = currentValue.toString();
         }
     }
 }
 
+// End of UI codes
 
+const timer = document.querySelector(".timer");
+const sessionValue = document.querySelector(".session-value");
+const breakValue = document.querySelector(".break-value");
+const restValue = document.querySelector(".rest-value");
+let minutes = 0, seconds = 0;
 
+function initTimerParam(stringType) {
+    switch (stringType) {
+        case "session":
+            minutes = sessionValue.textContent;
+            break;
+        case "break":
+            minutes = breakValue.textContent;
+            break;
+        case "rest":
+            minutes = restValue.textContent;
+            break;
+    }
+    currentSession = stringType;
+}
 
+function buildTimeString(minutes, seconds){
+    if (seconds < 10){
+        seconds = "0".concat(seconds.toString());
+    }
+    return `${minutes}:${seconds}`;
+}
 
+function startTimer() {
+    switchString = false;
+
+    if (switchPause === false){
+        seconds = 59;
+        minutes--;
+    }
+
+    switchPause = false;
+
+    const x = setInterval(() => {
+
+        timer.textContent = buildTimeString(minutes, seconds);
+
+        seconds--;
+        if (seconds === -1) {
+            clearInterval(x);
+            startTimer();
+        }
+        if (minutes === 0 && seconds === 0) {
+            clearInterval(x);
+        }
+        if (switchString){
+            clearInterval(x);
+        }
+
+        // console.log(`${minutes}:${seconds}`);
+
+    }, 1000);
+
+}
 
 
 
