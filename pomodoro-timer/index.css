@@ -19,6 +19,7 @@ html {
     margin-top: 100px;
     box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     align-items: center;
+    position: relative;
 }
 
 button{
@@ -32,7 +33,6 @@ button:focus{
     outline: none;
 }
 
-
 .nav{
     text-align: right;
 
@@ -40,22 +40,26 @@ button:focus{
 
 .edit{
     margin-right: 15px;
-    margin-top: 15px
+    margin-top: 15px;
+    font-size: 1.08em;
 }
 
+/* start scene */
 .start-scene{
     width: 334px;
     height: 422px;
     text-align: center;
     clear: both;
-    display: none;
+    opacity: 0%;
     transition: opacity 200ms ease;
+
 }
 
 .start-scene p{
     font-size: 20px;
     text-align: center;
     margin-top: 80px;
+    
 }
 
 .play{
@@ -63,11 +67,16 @@ button:focus{
     font-size: 59px;
 }
 
+/* main scene */
 .main-scene{
-    display: none;
     text-align: center;
+    opacity: 0%;
     transition: opacity 200ms ease;
-
+    top: -500px;
+    left: 0px;
+    width: 334px;
+    height: 422px;  
+    position: absolute;
 }
 
 .main-scene .title{
@@ -86,26 +95,40 @@ button:focus{
 }
 
 .controls{
-    margin-top: 40px;
-    font-size: 70px;
+    margin-top: 80px;
+    text-align: center;
 }
 
 .reset{
     font-size: 24px;
+    margin: 10px;
 
 }
 
 .pause{
     font-size: 45px;
+    margin: 10px;
+
 }
 
 .stop{
     font-size: 24px;
+    margin: 10px;
+
 }
 
+/* settings scene */
 .settings-scene{
+    opacity: 0%;
     transition: opacity 200ms ease;
-    display: none;
+    top: -1000px;
+    left: 0px;
+    width: 334px;
+    height: 422px;  
+    position: absolute;
+    text-align: center;
+    background-color: white;
+    border-radius: 17px;
 }
 
 .settings-scene p{
@@ -121,6 +144,7 @@ button:focus{
     grid-template-rows: auto auto auto;
     grid-template-columns: auto auto;
     font-size: 22px;
+    
 }
 
 .setting .fas{
@@ -128,7 +152,7 @@ button:focus{
 }
 
 .setting-title{
-    margin-left: 39px;
+
     margin-top: 28px;
 }
 
@@ -139,5 +163,18 @@ button:focus{
 }
 
 .fade{
-    display: inherit;
+    opacity: 100%;
+    top: 0px;
+}
+
+.adjust{
+    margin-top: 40px;
+    background-color: #3f3f3f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.adjust:active{
+    opacity: 90%;
 }
