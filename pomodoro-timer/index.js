@@ -11,7 +11,6 @@ const resetBtn = document.querySelector(".reset");
 const adjustBtn = document.querySelector(".adjust");
 const minusBtns = document.querySelectorAll(".minus");
 const plusBtns = document.querySelectorAll(".plus");
-let switchString = false;
 let switchPause = false;
 let currentSession = "";
 let sessionNumber = 0;
@@ -21,8 +20,10 @@ const REST = "rest";
 
 playBtn.addEventListener("click", () => {
     initTimerParam(SESSION);
+    updateSessionText();
     showMain();
-    timer.textContent = buildTimeString(minutes, 0);
+    timer.textContent = secToTimeStr
+        (minutes, 0);
     startTimer();
 });
 
@@ -33,6 +34,7 @@ settingsBtnSettings.addEventListener("click", closeSettings);
 settingsBtnMain.addEventListener("click", showSettings);
 
 stopBtn.addEventListener("click", () => {
+    clearInterval(decrement);
     showStart();
     resetAll();
 });
@@ -40,17 +42,16 @@ stopBtn.addEventListener("click", () => {
 pauseBtn.addEventListener("click", (e) => {
     const eClassList = e.target.classList;
     updatePauseBtn(eClassList);
-    updateSessionText();
 });
 
 resetBtn.addEventListener("click", () => {
     initTimerParam(currentSession);
-    timer.textContent = buildTimeString(minutes, seconds = 0);
+    timer.textContent = secToTimeStr
+        (minutes, seconds = 0);
 });
 
 adjustBtn.addEventListener("click", () => {
     showStart();
-    switchString = true;
     sessionNumber = 0;
 });
 
@@ -66,17 +67,17 @@ plusBtns.forEach((btn) => {
     })
 });
 
-function updatePauseBtn(eClassList){
+function updatePauseBtn(eClassList) {
     eClassList.toggle("fa-pause");
     eClassList.toggle("fa-play");
 
-    if (eClassList.contains("fa-pause")){
+    if (eClassList.contains("fa-pause")) {
         switchPause = true; // play
-        switchString = false;
+        setInterval(decrement, 1000);
         startTimer();
-    } else if (eClassList.contains("fa-play")){
+    } else if (eClassList.contains("fa-play")) {
         switchPause = false; // pause
-        switchString = true;
+        clearInterval(decrement);
     }
 }
 
@@ -126,12 +127,14 @@ const breakValue = document.querySelector(".break-value");
 const restValue = document.querySelector(".rest-value");
 const sessionText = document.querySelector(".session");
 const beepAudio = document.querySelector(".beep-audio");
-let minutes = 0, seconds = 0;
+let minutes = 0, seconds = 0, defSecond = 59;
+let decrement = true;
 
-function testMode(){
+function testMode() {
     breakValue.textContent = 1;
     restValue.textContent = 1;
     sessionValue.textContent = 1;
+    defSecond = 3;
 }
 
 testMode();
@@ -151,63 +154,39 @@ function initTimerParam(stringType) {
     currentSession = stringType;
 }
 
-function buildTimeString(minutes, seconds){
-    if (seconds < 10){
-        seconds = "0".concat(seconds.toString());
+function secToTimeStr(sec) {
+    let hour = 0, minute = 0;
+    hour = Math.floor(sec / 3600);
+    sec = sec - (hour * 3600);
+    minutes = Math.floor(sec / 60);
+    sec = sec - (minutes * 60);
+
+    function format(n){
+        return n < 10 ? "0" + n : n;
     }
-    return `${minutes}:${seconds}`;
+
+    return hour > 0 ? `${format(hour)}:${format(minutes)}:${format(sec)}` : 
+    `${format(minutes)}:${format(sec)}`;
 }
+
 
 function startTimer() {
-    switchString = false;
-
-    if (switchPause === false){
-        seconds = 3;
-        minutes--;
-    }
-
-    switchPause = false;
-
-    const x = setInterval(() => {
-
-        timer.textContent = buildTimeString(minutes, seconds);
-
-        seconds--;
-
-        console.log(`${minutes}:${seconds}`);
 
 
-        if (seconds === -1) {
-            clearInterval(x);
-            startTimer();
-        }
-        if (minutes === 0 && seconds === 0) {
-            clearInterval(x);
-            sessionMonitorUpdate();
-
-        }
-        if (switchString){
-            clearInterval(x);
-        }
-
-
-    }, 1000);
-    
 
 }
 
-function sessionMonitorUpdate(){
+function sessionMonitorUpdate() {
     // console.log(currentSession + " sesh:" + (sessionNumber));
-
 
     if (currentSession === SESSION && sessionNumber < 3) {
         initTimerParam(BREAK);
     } else if (currentSession === BREAK && sessionNumber < 3) {
         sessionNumber++;
         initTimerParam(SESSION);
-    } else if (currentSession === SESSION && sessionNumber === 3){
+    } else if (currentSession === SESSION && sessionNumber === 3) {
         initTimerParam(REST);
-    } else if (currentSession === REST){
+    } else if (currentSession === REST) {
         resetAll();
     }
 
@@ -220,7 +199,7 @@ function sessionMonitorUpdate(){
     beepAudio.play();
 }
 
-function updateSessionText(){
+function updateSessionText() {
     if (currentSession === REST) {
         sessionText.textContent = "Congratulations! Please Rest :)";
         return;
@@ -231,16 +210,17 @@ function updateSessionText(){
     sessionText.textContent = `Session ${sessionNumber + 1}`;
 }
 
-function resetAll(){
-    switchString = false;
+function resetAll() {
+    switchString = true;
     switchPause = false;
-    currentSession = "";
+    currentSession = SESSION;
     sessionNumber = 0;
     minutes = 0;
     seconds = 0;
 
     initTimerParam(SESSION);
-    timer.textContent = buildTimeString(minutes, 0);
+    timer.textContent = secToTimeStr
+        (minutes, 0);
     sessionText.textContent = `Session ${sessionNumber + 1}`;
 }
 
