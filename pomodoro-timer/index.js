@@ -19,12 +19,9 @@ const BREAK = "break";
 const REST = "rest";
 
 playBtn.addEventListener("click", () => {
-    initTimerParam(SESSION);
-    updateSessionText();
-    showMain();
-    timer.textContent = secToTimeStr
-        (minutes, 0);
     startTimer();
+    resetAll();
+    showMain();
 });
 
 settingsBtnStart.addEventListener("click", showSettings);
@@ -46,13 +43,13 @@ pauseBtn.addEventListener("click", (e) => {
 
 resetBtn.addEventListener("click", () => {
     initTimerParam(currentSession);
-    timer.textContent = secToTimeStr
-        (minutes, seconds = 0);
+    timer.textContent = secToTimeStr(seconds);
 });
 
 adjustBtn.addEventListener("click", () => {
+    clearInterval(decrement);
     showStart();
-    sessionNumber = 0;
+    resetAll();
 });
 
 minusBtns.forEach((btn) => {
@@ -67,17 +64,30 @@ plusBtns.forEach((btn) => {
     })
 });
 
-function updatePauseBtn(eClassList) {
+function resetAll(){
+    sessionNumber = 0;
+    initTimerParam(SESSION);
+    updateSessionText();
+    // for the pause/play button
+    const eClassList = pauseBtn.classList;
+    eClassList.add("fa-pause");
+    eClassList.remove("fa-play");
+    switchPause = false; // pause
+}
+
+function updatePauseBtn() {
+    const eClassList = pauseBtn.classList;
     eClassList.toggle("fa-pause");
     eClassList.toggle("fa-play");
 
     if (eClassList.contains("fa-pause")) {
         switchPause = true; // play
-        setInterval(decrement, 1000);
         startTimer();
+        // console.log("Playing from pause");
     } else if (eClassList.contains("fa-play")) {
         switchPause = false; // pause
         clearInterval(decrement);
+        // console.log("Pause from playing");
     }
 }
 
@@ -127,31 +137,33 @@ const breakValue = document.querySelector(".break-value");
 const restValue = document.querySelector(".rest-value");
 const sessionText = document.querySelector(".session");
 const beepAudio = document.querySelector(".beep-audio");
-let minutes = 0, seconds = 0, defSecond = 59;
+
+// global params
+let seconds = 0;
 let decrement = true;
 
 function testMode() {
-    breakValue.textContent = 1;
-    restValue.textContent = 1;
-    sessionValue.textContent = 1;
-    defSecond = 3;
+    seconds = 3;
 }
-
-testMode();
 
 function initTimerParam(stringType) {
     switch (stringType) {
         case SESSION:
-            minutes = sessionValue.textContent;
+            seconds = sessionValue.textContent * 60;
             break;
         case BREAK:
-            minutes = breakValue.textContent;
+            seconds = breakValue.textContent * 60;
             break;
         case REST:
-            minutes = restValue.textContent;
+            seconds = restValue.textContent * 60;
             break;
     }
     currentSession = stringType;
+
+    // un-comment only if testing
+    // testMode();
+
+    return seconds;
 }
 
 function secToTimeStr(sec) {
@@ -161,17 +173,24 @@ function secToTimeStr(sec) {
     minutes = Math.floor(sec / 60);
     sec = sec - (minutes * 60);
 
-    function format(n){
+    function format(n) {
         return n < 10 ? "0" + n : n;
     }
 
-    return hour > 0 ? `${format(hour)}:${format(minutes)}:${format(sec)}` : 
-    `${format(minutes)}:${format(sec)}`;
+    return hour > 0 ? `${format(hour)}:${format(minutes)}:${format(sec)}` :
+        `${format(minutes)}:${format(sec)}`;
 }
 
 
 function startTimer() {
-
+    
+    decrement = setInterval (function(){
+        if (seconds === -1){
+            clearInterval(decrement);
+            sessionMonitorUpdate();
+        }
+        timer.textContent = secToTimeStr(seconds--);
+    }, 1000);
 
 
 }
@@ -187,12 +206,12 @@ function sessionMonitorUpdate() {
     } else if (currentSession === SESSION && sessionNumber === 3) {
         initTimerParam(REST);
     } else if (currentSession === REST) {
+        clearInterval(decrement);
+        showStart();
         resetAll();
     }
 
-
-    const eClassList = pauseBtn.classList;
-    updatePauseBtn(eClassList);
+    updatePauseBtn();
 
     updateSessionText();
 
@@ -210,19 +229,6 @@ function updateSessionText() {
     sessionText.textContent = `Session ${sessionNumber + 1}`;
 }
 
-function resetAll() {
-    switchString = true;
-    switchPause = false;
-    currentSession = SESSION;
-    sessionNumber = 0;
-    minutes = 0;
-    seconds = 0;
-
-    initTimerParam(SESSION);
-    timer.textContent = secToTimeStr
-        (minutes, 0);
-    sessionText.textContent = `Session ${sessionNumber + 1}`;
-}
 
 
 
