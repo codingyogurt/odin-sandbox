@@ -1,15 +1,129 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-        <title>Library Web App</title>
-    </head>
-    <body>
-        <div class="nav">
-            
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+        integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Library Web App</title>
+
+</head>
+
+<body>
+    <!-- main side -->
+
+    <div class="main-container">
+
+        <!-- unread books section -->
+        <div class="unread-books-section">
+            <p class="section-title">Unread Books</p>
+
+            <div class="item-container">
+                <div class="book-item">
+                    <div class="book-image">
+                        <img src="" alt="">
+                    </div>
+                    <p class="book-name">
+                        Rich Dad Poor Dad
+                    </p>
+                    <p class="book-author">
+                        Robert Kiyosaki
+                    </p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- script -->
-        <script src="js/index.js"></script>
-    </body>
+        <!-- liked books section -->
+        <div class="liked-books-section">
+            <p class="section-title">Liked Books</p>
+
+            <div class="item-container">
+                <div class="book-item">
+                    <div class="book-image">
+                        <img src="" alt="">
+                    </div>
+                    <p class="book-name">
+                        Rich Dad Poor Dad
+                    </p>
+                    <p class="book-author">
+                        Robert Kiyosaki
+                    </p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="read-books-section">
+            <p class="section-title">Read Books</p>
+
+            <div class="item-container">
+                <div class="book-item">
+                    <div class="book-image">
+                        <img src="" alt="">
+                    </div>
+                    <p class="book-name">
+                        Rich Dad Poor Dad
+                    </p>
+                    <p class="book-author">
+                        Robert Kiyosaki
+                    </p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- side bar profile -->
+    <div class="profile">
+        <img class="profile-pic" src="/images/profile-photo.png" alt="">
+        <div class="welcome-text">
+            <p>Welcome back, Ryan!</p>
+        </div>
+        <div class="books-status">
+            <div class="status-item total-books">
+                <p class="item-value">10</p>
+                <p>Total Books</p>
+            </div>
+            <div class="status-item total-read">
+                <p class="item-value">5</p>
+                <p>Read</p>
+            </div>
+            <div class="status-item total-unread">
+                <p class="item-value">3</p>
+                <p>Unread</p>
+            </div>
+        </div>
+        <button class="add-book normal-btn">Add book</button>
+        <div class="copyright-content">
+            <p>By: RyeCoder</p>
+            <p>For The Odin Project Curriculum 2019</p>
+        </div>
+    </div>
+
+
+    <!-- script -->
+    <script src="js/index.js"></script>
+</body>
+
 </html>
