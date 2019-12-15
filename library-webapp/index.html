@@ -378,7 +378,7 @@
                 <p>Unread</p>
             </div>
         </div>
-        <button class="add-book-toggle normal-btn">Add book</button>
+        <button class="normal-btn" id="add-book-toggle">Add book</button>
         <div class="copyright-content">
             <p>By: RyeCoder</p>
             <p>For The Odin Project Curriculum 2019</p>
@@ -386,39 +386,43 @@
     </div>
 
     <!-- add book ui -->
-    
+
     <div class="add-book-ui">
         <div class="add-book-overlay"></div>
         <div class="add-book">
-                <form action="" class="book-form">
-                    <p class="add-book-head">Add a book</p>
-                    <p class="add-book-subhead">Title</p>
-                    <input type="text" name="title" id="book-title">
-                    <div class="form-division">
-                        <p class="add-book-subhead" >Author</p>
-                        <input type="text" name="author" id="book-author">
-                        <p class="add-book-subhead" >Pages</p>
-                        <input type="number" name="pages" id="book-pages">
-                    </div>
-                    <p class="add-book-subhead" >What you've learned</p>
-                    <textarea name="learned" id="book-learned" cols="30" rows="10"></textarea>
-                    <div class="new-book-rating">
-                        <i class="fa fa-star" data-value="1"></i>
-                        <i class="fa fa-star" data-value="2"></i>
-                        <i class="fa fa-star" data-value="3"></i>
-                        <i class="fa fa-star" data-value="4"></i>
-                        <i class="fa fa-star" data-value="5 "></i>
-                    </div>
+            <form action="" class="book-form">
+
+                <p class="add-book-head">Add a book</p>
+                <p class="add-book-subhead">Title</p>
+                <input type="text" name="title" id="book-title">
+                <p class="add-boo
+                k-subhead">Author</p>
+                <input type="text" name="author" id="book-author">
+                <p class="add-book-subhead">Pages</p>
+                <input type="number" name="pages" id="book-pages">
+                <p class="add-book-subhead">Book Cover Url</p>
+                <input type="text" name="cover" id="book-cover">
+                <p class="add-book-subhead">What you've learned</p>
+                <textarea name="learned" id="book-learned" cols="40" rows="5"></textarea>
+
+                <div class="new-book-rating">
+                    <i class="fa fa-star" data-value="1"></i>
+                    <i class="fa fa-star" data-value="2"></i>
+                    <i class="fa fa-star" data-value="3"></i>
+                    <i class="fa fa-star" data-value="4"></i>
+                    <i class="fa fa-star" data-value="5 "></i>
                     <p>Rate it</p>
-                    <div class="book-form-buttons">
-                        <button class="normal-btn" id="add-book">Add book</button>
-                        <button class="normal-btn" id="cancel-book">Cancel</button>
-                    </div>
-                </form>
-            </div>
+
+                </div>
+                <div class="book-form-buttons">
+                    <button class="normal-btn" id="add-book">Add book</button>
+                    <button class="normal-btn cancel-btn" id="cancel-book">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    
+
 
 
     <!-- script -->
