@@ -1,6 +1,4 @@
-// core codes
-
-// storage
+// storage ******************
 const libraryStorage = [];
 
 // book object
@@ -14,10 +12,6 @@ function Book(title, author, pages, cover, wyl, rating, liked, read) {
     this.liked = liked // bool
     this.read = read // bool
 }
-
-
-
-// function for interacting with book storage
 
 // add book to storage
 function addBookToLibrary(title, author, pages, cover, wyl, rating = 0, liked = false, read = false) {
@@ -42,7 +36,17 @@ function editBookFromLibrary(title, newBook) {
 
 
 
-// UI codes
+// UI & Core functions ******************
+
+// global variable
+let selectedRating = 0;
+// the unread section in DOM
+const unreadSection = document.querySelector(".unread-books-section .item-container-above");
+// the liked section in DOM
+const likedSection = document.querySelector(".liked-books-section .item-container-above");
+// the read section in DOM
+const readSection = document.querySelector(".read-books-section .item-container-below");
+
 
 // render books
 function renderUnreadBooks() {
@@ -52,9 +56,6 @@ function renderUnreadBooks() {
             return book;
         }
     });
-
-    // the unread section in DOM
-    const unreadSection = document.querySelector(".unread-books-section .item-container-above");
 
     // loop thru unread and create book html and push to DOM
     unreads.forEach((book) => {
@@ -73,9 +74,6 @@ function renderLikedBooks() {
         }
     });
 
-    // the liked section in DOM
-    const likedSection = document.querySelector(".liked-books-section .item-container-above");
-
     // loop thru liked and create book html and push to DOM
     liked.forEach((book) => {
         if (book !== undefined) {
@@ -92,9 +90,6 @@ function renderReadBooks() {
             return book;
         }
     });
-
-    // the read section in DOM
-    const readSection = document.querySelector(".read-books-section .item-container-below");
 
     // loop thru read and create book html and push to DOM
     read.forEach((book) => {
@@ -158,7 +153,12 @@ function ratingToHtml(rate) {
     return rateHtml;
 }
 
-
+window.addEventListener("load", () => {
+    renderUnreadBooks();
+    renderLikedBooks();
+    renderReadBooks();
+    miniBtnAddEventListener()
+});
 
 // starting temporary data
 addBookToLibrary("Rich Dad Poor Dad", "Robert Kiyosaki", 365, "https://images-na.ssl-images-amazon.com/images/I/51zcMqY7GQL._SX331_BO1,204,203,200_.jpg", "Learned about assets", 4, false, true);
@@ -166,12 +166,6 @@ addBookToLibrary("Secrets of the Millionaire Mind", "T.Harve Eker", 450, "https:
 addBookToLibrary("How to Win Friends and Influence People", "Dale Carnegie", 500, "https://images-na.ssl-images-amazon.com/images/I/41AKuWAA8yL._SX319_BO1,204,203,200_.jpg", "Learned about dealing with people", 3, true, false);
 addBookToLibrary("4 Hour Work Week", "Tim Ferris", 356, "https://images-na.ssl-images-amazon.com/images/I/81qW97ndkvL.jpg", "Learned how to work lesser", 3, true, false);
 
-renderUnreadBooks();
-renderLikedBooks();
-renderReadBooks();
-
-
-// some more UI codes ***************
 
 function toggleAddBookUI(){
     // toggle add-book view
@@ -185,11 +179,68 @@ document.querySelector("#add-book-toggle").addEventListener("click", (e) => {
     toggleAddBookUI();
 });
 
-// add-book-toggle view/hide for mini-btns
-document.querySelectorAll(".mini-btn").forEach((btn) => {
-    btn.addEventListener("click",(e) => {
-        if (e.target.classList.contains("fa-edit")){
-            toggleAddBookUI();
-        }
+// cancel-btn toggle add-book-toogle
+document.querySelector(".cancel-btn").addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleAddBookUI();
+})
+
+document.querySelector(".add-book-overlay").addEventListener("click", (e) => {
+    toggleAddBookUI();
+})
+
+function miniBtnAddEventListener(){
+    // add-book-toggle view/hide for mini-btns
+    document.querySelectorAll(".mini-btn").forEach((btn) => {
+        btn.addEventListener("click",(e) => {
+            if (e.target.classList.contains("fa-edit")){
+                toggleAddBookUI();
+            }
+        });
+    });
+}
+
+// add new book to ui individually and with clearing books in UI first
+function addNewBooktoUI(book){
+    if (book.read){
+        readSection.innerHTML = "";
+        renderReadBooks();
+    } else {
+        unreadSection.innerHTML = "";
+        renderUnreadBooks();
+    }
+    if (book.liked){
+        likedSection.innerHTML = "";
+        renderLikedBooks();
+    }
+}
+
+// adding book function
+document.querySelector(".book-form-buttons #add-book")
+    .addEventListener("click", (e) => {
+        e.preventDefault();
+        let bookTitle = document.querySelector("#book-title").value;
+        let bookAuthor = document.querySelector("#book-author").value;
+        let bookCover = document.querySelector("#book-cover").value;
+        let read = document.querySelector("#book-read").checked;
+        let liked = document.querySelector("#book-liked").checked;
+        let bookPages = document.querySelector("#book-pages").value;
+        let bookLearned = document.querySelector("#book-learned").value;
+        let bookRate = selectedRating;
+
+        addBookToLibrary(bookTitle, bookAuthor, bookPages, bookCover, bookLearned, bookRate, liked, read);
+
+        const book = new Book(bookTitle, bookAuthor, bookPages, bookCover, bookLearned, bookRate, liked, read);
+        addNewBooktoUI(book);
+
+        miniBtnAddEventListener()
+
+        toggleAddBookUI();
+});
+
+// gets data of the rating clicked set to a global variable
+document.querySelectorAll(".new-book-rating .fa-star").forEach((star) => {
+    star.addEventListener("click", (e) => {
+        selectedRating = e.target.getAttribute("data-value");
     });
 });

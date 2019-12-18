@@ -293,7 +293,7 @@ button:focus{
     height: 100%;
     background-color: white;
     padding: 50px 60px;
-    transition: right 400ms ease;
+    transition: all 400ms ease;
     opacity: 0;
 }
 
