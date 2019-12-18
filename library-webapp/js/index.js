@@ -1,14 +1,3 @@
-// some more UI codes
-
-// add-book-toggle view/hide
-document.querySelector("#add-book-toggle")
-    .addEventListener("click", (e) => {
-        // toggle add-book view
-        document.querySelector(".add-book").classList.toggle("show-add-book");
-        // toggle overlay
-        document.querySelector(".add-book-overlay").classList.toggle("show-add-book-overlay");
-    });
-
 // core codes
 
 // storage
@@ -25,6 +14,8 @@ function Book(title, author, pages, cover, wyl, rating, liked, read) {
     this.liked = liked // bool
     this.read = read // bool
 }
+
+
 
 // function for interacting with book storage
 
@@ -49,7 +40,11 @@ function editBookFromLibrary(title, newBook) {
     libraryStorage.push(newBook);
 }
 
-// render books,
+
+
+// UI codes
+
+// render books
 function renderUnreadBooks() {
     // load all unread books from library
     const unreads = libraryStorage.map((book) => {
@@ -119,7 +114,6 @@ function bookToHtml(book) {
         <img class="book-image" src="${book.cover}" alt="">
 
         <div class="book-image-overlay">
-            <button class="mini-btn fas fa-heart"></button>
             <button class="mini-btn fas fa-edit"></button>
             <button class="mini-btn fas fa-trash"></button>
 
@@ -165,12 +159,10 @@ function ratingToHtml(rate) {
 }
 
 
-// unread books render function
-
 
 // starting temporary data
-addBookToLibrary("Rich Dad Poor Dad", "Robert Kiyosaki", 365, "https://images-na.ssl-images-amazon.com/images/I/51zcMqY7GQL._SX331_BO1,204,203,200_.jpg", "Learned about assets", 4, true, true);
-addBookToLibrary("Secrets of the Millionaire Mind", "T.Harve Eker", 450, "https://images-na.ssl-images-amazon.com/images/I/41CnX3uTZFL.jpg", "Learned about understanding rich people", 4, true, true);
+addBookToLibrary("Rich Dad Poor Dad", "Robert Kiyosaki", 365, "https://images-na.ssl-images-amazon.com/images/I/51zcMqY7GQL._SX331_BO1,204,203,200_.jpg", "Learned about assets", 4, false, true);
+addBookToLibrary("Secrets of the Millionaire Mind", "T.Harve Eker", 450, "https://images-na.ssl-images-amazon.com/images/I/41CnX3uTZFL.jpg", "Learned about understanding rich people", 4, false, true);
 addBookToLibrary("How to Win Friends and Influence People", "Dale Carnegie", 500, "https://images-na.ssl-images-amazon.com/images/I/41AKuWAA8yL._SX319_BO1,204,203,200_.jpg", "Learned about dealing with people", 3, true, false);
 addBookToLibrary("4 Hour Work Week", "Tim Ferris", 356, "https://images-na.ssl-images-amazon.com/images/I/81qW97ndkvL.jpg", "Learned how to work lesser", 3, true, false);
 
@@ -178,3 +170,26 @@ renderUnreadBooks();
 renderLikedBooks();
 renderReadBooks();
 
+
+// some more UI codes ***************
+
+function toggleAddBookUI(){
+    // toggle add-book view
+    document.querySelector(".add-book").classList.toggle("show-add-book");
+    // toggle overlay
+    document.querySelector(".add-book-overlay").classList.toggle("show-add-book-overlay");  
+}
+
+// add-book-toggle view/hide
+document.querySelector("#add-book-toggle").addEventListener("click", (e) => {
+    toggleAddBookUI();
+});
+
+// add-book-toggle view/hide for mini-btns
+document.querySelectorAll(".mini-btn").forEach((btn) => {
+    btn.addEventListener("click",(e) => {
+        if (e.target.classList.contains("fa-edit")){
+            toggleAddBookUI();
+        }
+    });
+});

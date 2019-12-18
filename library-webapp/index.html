@@ -54,7 +54,7 @@
 
     <!-- side bar profile -->
     <div class="profile">
-        <img class="profile-pic" src="/images/profile-1.png" alt="">
+        <img class="profile-pic" src="images/profile-1.png" alt="">
         <div class="welcome-text">
             <p>Welcome back, Ryan!</p>
         </div>
@@ -92,10 +92,25 @@
                 <p class="add-boo
                 k-subhead">Author</p>
                 <input type="text" name="author" id="book-author">
-                <p class="add-book-subhead">Pages</p>
-                <input type="number" name="pages" id="book-pages">
                 <p class="add-book-subhead">Book Cover Url</p>
                 <input type="text" name="cover" id="book-cover">
+                
+                <div class="horizontal-form">
+                    <div class="checkbox">
+                        <input type="checkbox" name="read" id="book-read">
+                        <p>Read</p>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="liked" id="book-liked">
+                        <p>Liked</p>
+                    </div>
+                    <div class="pages">
+                        <p class="add-book-subhead">Pages</p>
+                        <input type="number" name="pages" id="book-pages">
+                    </div>
+
+                </div>
+
                 <p class="add-book-subhead">What you've learned</p>
                 <textarea name="learned" id="book-learned" cols="40" rows="5"></textarea>
 
