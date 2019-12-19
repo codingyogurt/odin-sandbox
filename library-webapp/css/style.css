@@ -387,13 +387,25 @@ input[type="text"] {
 }
 
 .new-book-rating i {
-  color: #f7b500;
+  color: #333333;
   font-size: 24px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
   margin-left: 5px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+/* got these from css tricks https://css-tricks.com/star-ratings/ only get what is needed*/
+
+/* reverse the direction */
+.new-book-rating {
+  direction: rtl;
+}
+/* activate by hover, select all from hover to end of hovered i */
+.new-book-rating i:hover::before,
+.new-book-rating > i:hover ~ i::before {
+  color: #f7b500;
 }
 
 .book-form-buttons {

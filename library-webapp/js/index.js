@@ -39,11 +39,16 @@ function addBookToLibrary(
 
 // removing book from storage
 function removeBookToLibrary(title) {
+  let removedBook;
+
   for (key in libraryStorage) {
     if (libraryStorage[key].title === title) {
+      removedBook = libraryStorage[key];
       libraryStorage.splice(key, 1);
     }
   }
+
+  return removedBook;
 }
 
 // editing book from storage
@@ -135,8 +140,12 @@ function bookToHtml(book) {
         <img class="book-image" src="${book.cover}" alt="">
 
         <div class="book-image-overlay">
-            <button class="mini-btn fas fa-edit"></button>
-            <button class="mini-btn fas fa-trash"></button>
+            <button class="mini-btn fas fa-edit" data-title="${
+              book.title
+            }"></button>
+            <button class="mini-btn fas fa-trash" data-title="${
+              book.title
+            }"></button>
 
         </div>
 
@@ -252,13 +261,17 @@ document.querySelector(".add-book-overlay").addEventListener("click", e => {
   toggleAddBookUI();
 });
 
+// add-book-toggle view/hide for mini-btn EDIT
 function miniBtnAddEventListener() {
-  // add-book-toggle view/hide for mini-btns
   document.querySelectorAll(".mini-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       if (e.target.classList.contains("fa-edit")) {
         toggleAddBookUI();
         addBookUIModeOn(false);
+      }
+      if (e.target.classList.contains("fa-trash")) {
+        updateBookUI(removeBookToLibrary(e.target.getAttribute("data-title")));
+        miniBtnAddEventListener();
       }
     });
   });
@@ -268,6 +281,7 @@ document.querySelector("#add-book-toggle").addEventListener("click", () => {
   addBookUIModeOn(true);
 });
 
+// changes that add-book UI header to Edit or Add
 function addBookUIModeOn(state) {
   // true = add book mode, false edit book mode
   if (state) {
@@ -280,7 +294,7 @@ function addBookUIModeOn(state) {
 }
 
 // add new book to ui individually and with clearing books in UI first
-function addNewBooktoUI(book) {
+function updateBookUI(book) {
   if (book.read) {
     readSection.innerHTML = "";
     renderReadBooks();
@@ -330,16 +344,37 @@ document
       newRead
     );
 
-    addNewBooktoUI(book);
+    updateBookUI(book);
 
     miniBtnAddEventListener();
 
     toggleAddBookUI();
   });
 
+const newRatingStars = document.querySelectorAll(".new-book-rating .fa-star");
+
 // gets data of the rating clicked set to a global variable
-document.querySelectorAll(".new-book-rating .fa-star").forEach(star => {
+newRatingStars.forEach(star => {
   star.addEventListener("click", e => {
     selectedRating = e.target.getAttribute("data-value");
+    updateNewRatingStarsUI(selectedRating);
   });
 });
+
+// update the UI of stars depending on selected rating
+function updateNewRatingStarsUI(rating) {
+  let i = 0;
+
+  newRatingStars.forEach(star => {
+    star.style.color = "#f7b500";
+  });
+
+  rating = 5 - rating;
+
+  newRatingStars.forEach(star => {
+    if (i < rating) {
+      star.style.color = "#333333";
+    }
+    i++;
+  });
+}
