@@ -1,5 +1,73 @@
+window.addEventListener("load", () => {
+  updateBookUI();
+  miniBtnAddEventListener();
+});
+
 // storage ******************
-const libraryStorage = [];
+let libraryStorage;
+
+// if localStorage is empty or not
+if (localStorage.getItem("libraryStorage") === null) {
+  libraryStorage = [];
+
+  // some default data, some recommendation :)
+  addBookToLibrary(
+    "Rich Dad Poor Dad",
+    "Robert Kiyosaki",
+    365,
+    "https://images-na.ssl-images-amazon.com/images/I/51zcMqY7GQL._SX331_BO1,204,203,200_.jpg",
+    "Learned about assets",
+    4,
+    false,
+    true
+  );
+  addBookToLibrary(
+    "Secrets of the Millionaire Mind",
+    "T.Harve Eker",
+    450,
+    "https://images-na.ssl-images-amazon.com/images/I/41CnX3uTZFL.jpg",
+    "Learned about understanding rich people",
+    4,
+    true,
+    true
+  );
+  addBookToLibrary(
+    "How to Win Friends and Influence People",
+    "Dale Carnegie",
+    500,
+    "https://images-na.ssl-images-amazon.com/images/I/41AKuWAA8yL._SX319_BO1,204,203,200_.jpg",
+    "Learned about dealing with people",
+    3,
+    false,
+    false
+  );
+  addBookToLibrary(
+    "4 Hour Work Week",
+    "Tim Ferris",
+    356,
+    "https://images-na.ssl-images-amazon.com/images/I/81qW97ndkvL.jpg",
+    "Learned how to work lesser",
+    3,
+    true,
+    false
+  );
+
+  // profile picture to storage
+  let profilePic =
+    "https://pbs.twimg.com/profile_images/1203522697419837440/UNAgL8xO_400x400.jpg";
+  document.querySelector(".profile-pic").src = profilePic;
+  localStorage.setItem("libraryProfilePicture", profilePic);
+} else {
+  libraryStorage = JSON.parse(localStorage.getItem("libraryStorage"));
+
+  // profile picture from storage
+  let profilePic = localStorage.getItem("libraryProfilePicture") + "";
+  document.querySelector(".profile-pic").src = profilePic;
+}
+
+function saveToStorage() {
+  localStorage.setItem("libraryStorage", JSON.stringify(libraryStorage));
+}
 
 // book object
 function Book(title, author, pages, cover, wyl, rating, liked, read) {
@@ -35,6 +103,7 @@ function addBookToLibrary(
     read
   );
   libraryStorage.push(newBook);
+  saveToStorage();
 }
 
 // removing book from storage
@@ -45,13 +114,14 @@ function removeBookToLibrary(title) {
     if (libraryStorage[key].title === title) {
       removedBook = libraryStorage[key];
       libraryStorage.splice(key, 1);
+      saveToStorage();
     }
   }
 
   return removedBook;
 }
 
-// editing book from storage
+// editing book and send to storage
 function editBookFromLibrary(title, newBook) {
   removeBookToLibrary(title);
   libraryStorage.push(newBook);
@@ -69,6 +139,10 @@ const liked = document.querySelector("#book-liked");
 const bookPages = document.querySelector("#book-pages");
 const bookLearned = document.querySelector("#book-learned");
 
+const totalBooks = document.querySelector("#total-books");
+const totalRead = document.querySelector("#total-read");
+const totalUnread = document.querySelector("#total-unread");
+
 // the unread section in DOM
 const unreadSection = document.querySelector(
   ".unread-books-section .item-container-above"
@@ -84,12 +158,17 @@ const readSection = document.querySelector(
 
 // render books
 function renderUnreadBooks() {
+  let unreadBooksSum = 0;
   // load all unread books from library
   const unreads = libraryStorage.map(book => {
     if (!book.read) {
+      unreadBooksSum++;
       return book;
     }
   });
+
+  // set the value of the counter
+  totalUnread.textContent = unreadBooksSum;
 
   // loop thru unread and create book html and push to DOM
   unreads.forEach(book => {
@@ -97,6 +176,7 @@ function renderUnreadBooks() {
       unreadSection.innerHTML = unreadSection.innerHTML + bookToHtml(book);
     }
   });
+  updateTotalBooksCounter();
 }
 
 function renderLikedBooks() {
@@ -116,12 +196,16 @@ function renderLikedBooks() {
 }
 
 function renderReadBooks() {
+  let readBooksSum = 0;
   // load all read books from library
   const read = libraryStorage.map(book => {
     if (book.read) {
+      readBooksSum++;
       return book;
     }
   });
+
+  totalRead.textContent = readBooksSum;
 
   // loop thru read and create book html and push to DOM
   read.forEach(book => {
@@ -129,6 +213,11 @@ function renderReadBooks() {
       readSection.innerHTML = readSection.innerHTML + bookToHtml(book);
     }
   });
+  updateTotalBooksCounter();
+}
+
+function updateTotalBooksCounter() {
+  totalBooks.textContent = libraryStorage.length;
 }
 
 // converts book object to HTML markup for rendering
@@ -188,55 +277,6 @@ function ratingToHtml(rate) {
   return rateHtml;
 }
 
-window.addEventListener("load", () => {
-  renderUnreadBooks();
-  renderLikedBooks();
-  renderReadBooks();
-  miniBtnAddEventListener();
-});
-
-// starting temporary data
-addBookToLibrary(
-  "Rich Dad Poor Dad",
-  "Robert Kiyosaki",
-  365,
-  "https://images-na.ssl-images-amazon.com/images/I/51zcMqY7GQL._SX331_BO1,204,203,200_.jpg",
-  "Learned about assets",
-  4,
-  false,
-  true
-);
-addBookToLibrary(
-  "Secrets of the Millionaire Mind",
-  "T.Harve Eker",
-  450,
-  "https://images-na.ssl-images-amazon.com/images/I/41CnX3uTZFL.jpg",
-  "Learned about understanding rich people",
-  4,
-  false,
-  true
-);
-addBookToLibrary(
-  "How to Win Friends and Influence People",
-  "Dale Carnegie",
-  500,
-  "https://images-na.ssl-images-amazon.com/images/I/41AKuWAA8yL._SX319_BO1,204,203,200_.jpg",
-  "Learned about dealing with people",
-  3,
-  true,
-  false
-);
-addBookToLibrary(
-  "4 Hour Work Week",
-  "Tim Ferris",
-  356,
-  "https://images-na.ssl-images-amazon.com/images/I/81qW97ndkvL.jpg",
-  "Learned how to work lesser",
-  3,
-  true,
-  false
-);
-
 function toggleAddBookUI() {
   // toggle add-book view
   document.querySelector(".add-book").classList.toggle("show-add-book");
@@ -244,6 +284,16 @@ function toggleAddBookUI() {
   document
     .querySelector(".add-book-overlay")
     .classList.toggle("show-add-book-overlay");
+
+  // clear fields on the form
+  bookTitle.value = "";
+  bookAuthor.value = "";
+  bookCover.value = "";
+  read.checked = false;
+  liked.checked = false;
+  bookPages.value = "";
+  bookLearned.value = "";
+  updateNewRatingStarsUI(0);
 }
 
 // add-book-toggle view/hide
@@ -266,11 +316,15 @@ function miniBtnAddEventListener() {
   document.querySelectorAll(".mini-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       if (e.target.classList.contains("fa-edit")) {
+        // activate edit toggle
         toggleAddBookUI();
         addBookUIModeOn(false);
+        updateBookUIForEdit(e.target.getAttribute("data-title"));
       }
       if (e.target.classList.contains("fa-trash")) {
-        updateBookUI(removeBookToLibrary(e.target.getAttribute("data-title")));
+        // delete current book selected
+        removeBookToLibrary(e.target.getAttribute("data-title"));
+        updateBookUI();
         miniBtnAddEventListener();
       }
     });
@@ -281,10 +335,28 @@ document.querySelector("#add-book-toggle").addEventListener("click", () => {
   addBookUIModeOn(true);
 });
 
+function updateBookUIForEdit(title) {
+  for (key in libraryStorage) {
+    if (libraryStorage[key].title === title) {
+      let book = libraryStorage[key];
+      bookTitle.value = book.title;
+      bookTitle.disabled = true;
+      bookAuthor.value = book.author;
+      bookCover.value = book.cover;
+      read.checked = book.read;
+      liked.checked = book.liked;
+      bookPages.value = book.pages;
+      bookLearned.value = book.wyl;
+      updateNewRatingStarsUI(book.rating);
+    }
+  }
+}
+
 // changes that add-book UI header to Edit or Add
 function addBookUIModeOn(state) {
   // true = add book mode, false edit book mode
   if (state) {
+    bookTitle.disabled = false;
     document.querySelector(".add-book-head").textContent = "Add a book";
     document.querySelector("#add-book").textContent = "Add book";
   } else {
@@ -294,25 +366,34 @@ function addBookUIModeOn(state) {
 }
 
 // add new book to ui individually and with clearing books in UI first
-function updateBookUI(book) {
-  if (book.read) {
-    readSection.innerHTML = "";
-    renderReadBooks();
-  } else {
-    unreadSection.innerHTML = "";
-    renderUnreadBooks();
-  }
-  if (book.liked) {
-    likedSection.innerHTML = "";
-    renderLikedBooks();
-  }
+function updateBookUI() {
+  // if (book.read) {
+  //   readSection.innerHTML = "";
+  //   renderReadBooks();
+  // } else {
+  //   unreadSection.innerHTML = "";
+  //   renderUnreadBooks();
+  // }
+  // if (book.liked) {
+  //   likedSection.innerHTML = "";
+  //   renderLikedBooks();
+  // }
+
+  readSection.innerHTML = "";
+  renderReadBooks();
+  unreadSection.innerHTML = "";
+  renderUnreadBooks();
+  likedSection.innerHTML = "";
+  renderLikedBooks();
 }
 
-// adding book function
+// adding new book button function
 document
   .querySelector(".book-form-buttons #add-book")
   .addEventListener("click", e => {
     e.preventDefault();
+
+    // get data from form to variables
     let newBookTitle = bookTitle.value;
     let newBookAuthor = bookAuthor.value;
     let newBookCover = bookCover.value;
@@ -321,6 +402,21 @@ document
     let newBookPages = bookPages.value;
     let newBookLearned = bookLearned.value;
     let newBookRate = selectedRating;
+
+    if (e.target.textContent !== "Edit book") {
+      // do not allow if newboottitle exist
+      for (key in libraryStorage) {
+        if (libraryStorage[key].title === newBookTitle) {
+          alert("Book already exist");
+          return;
+        }
+      }
+    }
+
+    // remove book from library. For edit mode.
+    if (e.target.textContent === "Edit book") {
+      removeBookToLibrary(newBookTitle);
+    }
 
     addBookToLibrary(
       newBookTitle,
@@ -344,10 +440,8 @@ document
       newRead
     );
 
-    updateBookUI(book);
-
+    updateBookUI();
     miniBtnAddEventListener();
-
     toggleAddBookUI();
   });
 
@@ -357,12 +451,12 @@ const newRatingStars = document.querySelectorAll(".new-book-rating .fa-star");
 newRatingStars.forEach(star => {
   star.addEventListener("click", e => {
     selectedRating = e.target.getAttribute("data-value");
-    updateNewRatingStarsUI(selectedRating);
+    updateNewRatingStarsUI(selectedRating, star);
   });
 });
 
 // update the UI of stars depending on selected rating
-function updateNewRatingStarsUI(rating) {
+function updateNewRatingStarsUI(rating, star) {
   let i = 0;
 
   newRatingStars.forEach(star => {
@@ -378,3 +472,20 @@ function updateNewRatingStarsUI(rating) {
     i++;
   });
 }
+
+// changin profile picture
+function updateProfile() {
+  let profilePic = prompt("Enter new profile image url");
+  if (profilePic !== null && profilePic !== "") {
+    document.querySelector(".profile-pic").src = profilePic;
+    localStorage.setItem("libraryProfilePicture", profilePic);
+  }
+}
+
+document.querySelector(".profile-pic").addEventListener("click", e => {
+  updateProfile();
+});
+
+document.querySelector(".welcome-text").addEventListener("click", e => {
+  updateProfile();
+});

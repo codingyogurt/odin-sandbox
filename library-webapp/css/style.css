@@ -27,12 +27,15 @@ body {
   height: 163px;
   border-radius: 80px;
   margin-top: 105px;
+  cursor: pointer;
+  background: red;
 }
 
 .welcome-text {
   font-size: 16px;
   margin-top: 22px;
   text-align: center;
+  cursor: pointer;
 }
 
 .books-status {
