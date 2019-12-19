@@ -1,140 +1,135 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-        integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Library Web App</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <!-- main side -->
 
     <div class="main-container">
+      <!-- unread books section -->
+      <div class="unread-books-section">
+        <p class="section-title">Unread Books</p>
 
-        <!-- unread books section -->
-        <div class="unread-books-section">
-            <p class="section-title">Unread Books</p>
-
-            <div class="item-container-above">
-
-                <!-- books will be loaded here -->
-
-            </div>
-
+        <div class="item-container-above">
+          <!-- books will be loaded here -->
         </div>
+      </div>
 
-        <!-- liked books section -->
-        <div class="liked-books-section">
-            <p class="section-title">Liked Books</p>
+      <!-- liked books section -->
+      <div class="liked-books-section">
+        <p class="section-title">Liked Books</p>
 
-            <div class="item-container-above">
-
-                <!-- books will be loaded here -->
-
-            </div>
+        <div class="item-container-above">
+          <!-- books will be loaded here -->
         </div>
+      </div>
 
-        <!-- read books section -->
-        <div class="read-books-section">
-            <p class="section-title">Read Books</p>
+      <!-- read books section -->
+      <div class="read-books-section">
+        <p class="section-title">Read Books</p>
 
-            <div class="item-container-below">
-
-                <!-- books will be loaded here -->
-                
-
-            </div>
+        <div class="item-container-below">
+          <!-- books will be loaded here -->
         </div>
-
+      </div>
     </div>
 
     <!-- side bar profile -->
     <div class="profile">
-        <img class="profile-pic" src="images/profile-1.png" alt="">
-        <div class="welcome-text">
-            <p>Welcome back, Ryan!</p>
+      <img class="profile-pic" src="images/profile-1.png" alt="" />
+      <div class="welcome-text">
+        <p>Welcome back, Ryan!</p>
+      </div>
+      <div class="books-status">
+        <div class="status-item total-books">
+          <p class="item-value">10</p>
+          <p>Total Books</p>
         </div>
-        <div class="books-status">
-            <div class="status-item total-books">
-                <p class="item-value">10</p>
-                <p>Total Books</p>
-            </div>
-            <div class="status-item total-read">
-                <p class="item-value">5</p>
-                <p>Read</p>
-            </div>
-            <div class="status-item total-unread">
-                <p class="item-value">3</p>
-                <p>Unread</p>
-            </div>
+        <div class="status-item total-read">
+          <p class="item-value">5</p>
+          <p>Read</p>
         </div>
-        <button class="normal-btn" id="add-book-toggle">Add book</button>
-        <div class="copyright-content">
-            <p>By: RyeCoder</p>
-            <p>For The Odin Project Curriculum 2019</p>
+        <div class="status-item total-unread">
+          <p class="item-value">3</p>
+          <p>Unread</p>
         </div>
+      </div>
+      <button class="normal-btn" id="add-book-toggle">Add book</button>
+      <div class="copyright-content">
+        <p>By: RyeCoder</p>
+        <p>For The Odin Project Curriculum 2019</p>
+      </div>
     </div>
 
     <!-- add book ui -->
 
     <div class="add-book-ui">
-        <div class="add-book-overlay"></div>
-        <div class="add-book">
-            <form action="" class="book-form">
+      <div class="add-book-overlay"></div>
+      <div class="add-book">
+        <form action="" class="book-form">
+          <p class="add-book-head">Add a book</p>
+          <p class="add-book-subhead">Title</p>
+          <input type="text" name="title" id="book-title" required />
+          <p class="add-book-subhead">Author</p>
+          <input type="text" name="author" id="book-author" required />
+          <p class="add-book-subhead">Book Cover Url</p>
+          <input type="text" name="cover" id="book-cover" required />
 
-                <p class="add-book-head">Add a book</p>
-                <p class="add-book-subhead">Title</p>
-                <input type="text" name="title" id="book-title" required>
-                <p class="add-book-subhead">Author</p>
-                <input type="text" name="author" id="book-author" required>
-                <p class="add-book-subhead">Book Cover Url</p>
-                <input type="text" name="cover" id="book-cover" required>
-                
-                <div class="horizontal-form">
-                    <div class="checkbox">
-                        <input type="checkbox" name="read" id="book-read">
-                        <p>Read</p>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" name="liked" id="book-liked">
-                        <p>Liked</p>
-                    </div>
-                    <div class="pages">
-                        <p class="add-book-subhead">Pages</p>
-                        <input type="number" name="pages" id="book-pages" required>
-                    </div>
+          <div class="horizontal-form">
+            <div class="checkbox">
+              <input type="checkbox" name="read" id="book-read" />
+              <p>Read</p>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" name="liked" id="book-liked" />
+              <p>Liked</p>
+            </div>
+            <div class="pages">
+              <p class="add-book-subhead">Pages</p>
+              <input type="number" name="pages" id="book-pages" required />
+            </div>
+          </div>
 
-                </div>
+          <p class="add-book-subhead">What you've learned</p>
+          <textarea
+            name="learned"
+            id="book-learned"
+            cols="40"
+            rows="5"
+          ></textarea>
 
-                <p class="add-book-subhead">What you've learned</p>
-                <textarea name="learned" id="book-learned" cols="40" rows="5"></textarea>
-
-                <div class="new-book-rating">
-                    <i class="fa fa-star" data-value="1"></i>
-                    <i class="fa fa-star" data-value="2"></i>
-                    <i class="fa fa-star" data-value="3"></i>
-                    <i class="fa fa-star" data-value="4"></i>
-                    <i class="fa fa-star" data-value="5 "></i>
-                    <p>Rate it</p>
-
-                </div>
-                <div class="book-form-buttons">
-                    <button class="normal-btn" id="add-book">Add book</button>
-                    <button class="normal-btn cancel-btn" id="cancel-book">Cancel</button>
-                </div>
-            </form>
-        </div>
+          <div class="new-book-rating">
+            <i class="fa fa-star" data-value="1"></i>
+            <i class="fa fa-star" data-value="2"></i>
+            <i class="fa fa-star" data-value="3"></i>
+            <i class="fa fa-star" data-value="4"></i>
+            <i class="fa fa-star" data-value="5 "></i>
+            <p>Rate it</p>
+          </div>
+          <div class="book-form-buttons">
+            <button class="normal-btn" id="add-book">Add book</button>
+            <button class="normal-btn cancel-btn" id="cancel-book">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-
-
-
 
     <!-- script -->
     <script src="js/index.js"></script>
-</body>
-
+  </body>
 </html>
