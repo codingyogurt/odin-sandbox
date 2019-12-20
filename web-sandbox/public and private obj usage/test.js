@@ -7,19 +7,19 @@ const book1 = bookFactory("Normal Title", "Book1 Author");
 
 console.log(book1.title);
 
-const bookFunctions = (function() {
-  // private method
-  function decryptTitle(book) {
-    return "decrypted title: Normal Title";
-  }
-
-  // public method
-  return {
-    printBookTitle: function(book) {
-      console.log(decryptTitle(book) + ", For Public Data");
-    }
+const bookFunctionsFactory = bookItem => {
+  //private methods
+  const decryptTitle = () => {
+    return "Decrypted Title: Normal Title";
   };
-})();
+  const printBookTitle = () => {
+    console.log(decryptTitle());
+  };
+  // became public when returned
+  return {
+    printBookTitle
+  };
+};
 
-bookFunctions.printBookTitle(book1);
-bookFunctions.decryptTitle(book1);
+const book1Functions = bookFunctionsFactory(book1);
+book1Functions.printBookTitle();
