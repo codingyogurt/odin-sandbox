@@ -36,6 +36,17 @@ html {
   color: #fd7792;
 }
 
+.menu {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.menu button {
+  margin: 20px;
+}
+
 #reset-btn {
   float: left;
 }
@@ -44,13 +55,21 @@ html {
   float: right;
 }
 
+ul {
+  margin-top: 10px;
+}
+
 li {
   list-style: none;
 }
 
+.game-stats {
+  margin: 40px 0px;
+}
+
 .stat {
   display: inline-block;
-  margin: 40px 10px 20px 10px;
+  margin: 0px 10px;
 }
 
 .stat i {
@@ -70,6 +89,7 @@ li {
 
 .game-board .game-board-item {
   min-height: 85px;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -107,24 +127,33 @@ button:focus {
   outline: none;
 }
 
+/* settings */
+
 .settings {
-  /* display: none; */
+  display: none;
   position: absolute;
   background-color: white;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
+  text-align: center;
 }
 
 .gridui {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 60% 20%;
+  margin: 50% 10%;
 }
 
 .gridui input {
-  height: 20px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.gridui i {
+  font-size: 40px;
+  margin-bottom: 10px;
 }
 
 .gridui #save {

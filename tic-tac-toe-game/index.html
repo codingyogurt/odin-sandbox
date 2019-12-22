@@ -27,6 +27,7 @@
         </div>
 
         <div class="game-stats">
+          <p class="">SCORE</p>
           <ul>
             <li class="stat">
               <i class="far fa-circle"></i>
@@ -78,17 +79,17 @@
           </div>
         </div>
         <div class="banner">
-          <p class="banner-text">Player 1</p>
-          <p id="marker"><i class="far fa-circle"></i></p>
+          <p class="banner-text">Player 1's Turn</p>
+          <p id="marker" class="far fa-circle"></p>
         </div>
       </div>
 
       <div class="settings">
         <div class="gridui">
-          <input type="text" name="" id="p1-name" />
-          <i class="far fa-circle"></i>
-          <input type="text" name="" id="p2-name" />
-          <i class="fas fa-times"></i>
+          <input type="text" name="" id="p1-name" value="Player 1" />
+          <i class="far fa-circle" id="p1-marker"></i>
+          <input type="text" name="" id="p2-name" value="Player 2" />
+          <i class="fas fa-times" id="p2-marker"></i>
           <button id="save">Save</button>
         </div>
       </div>
