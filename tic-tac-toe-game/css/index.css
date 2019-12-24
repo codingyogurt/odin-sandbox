@@ -93,6 +93,11 @@ li {
   cursor: pointer;
 }
 
+.game-board .colorize {
+  transition: background-color ease 1s;
+  background-color: #ffac8e;
+}
+
 .game-board .h-lining {
   border-top: solid 1px #3f4d71;
   border-bottom: solid 1px #3f4d71;
@@ -114,7 +119,7 @@ li {
 button {
   padding: 15px;
   border: none;
-  border-radius: 80px;
+  border-radius: 90px;
   cursor: pointer;
   background-color: #ffac8e;
 }
@@ -138,6 +143,13 @@ button:focus {
   height: 100%;
   width: 100%;
   text-align: center;
+}
+
+#close-btn {
+  float: right;
+  margin: 20px;
+  color: black;
+  font-size: 16px;
 }
 
 .gridui {
