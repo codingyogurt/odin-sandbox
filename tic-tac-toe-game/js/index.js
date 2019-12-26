@@ -6,6 +6,7 @@ const gameBoardManager = (() => {
   // each square in the item board
   const boardItems = document.querySelectorAll(".game-board-item");
 
+  // runs through the currentplayer selections and updates css of each data-item in DOM
   const showWinnerSelections = combination => {
     boardItems.forEach(item => {
       itemData = parseInt(item.getAttribute("data-item-number"));
@@ -212,7 +213,7 @@ const gameManager = (() => {
       return false;
     }
   };
-
+  // monitors if the game is draw, if counter is > 9
   const checkDraw = () => {
     draw++;
     return draw >= 9 ? true : false;
