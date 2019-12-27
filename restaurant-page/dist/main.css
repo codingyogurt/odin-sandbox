@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Cabin", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+#nav {
+  overflow: hidden;
+  padding: 16px 20px;
+  color: white;
+}
+
+/* Logo */
+#nav p {
+  display: inline;
+  font-size: 24px;
+}
+
+#menu {
+  float: right;
+  text-align: center;
+  justify-content: center;
+}
+
+#menu li {
+  display: inline-block;
+  margin: 0px 5px;
+}
+
+#menu a {
+  padding: 5px 10px;
+}
+
+#menu a:hover {
+  background-color: yellow;
+}
+
+/* Home UI */
+
+#home-img {
+  position: absolute;
+  width: 40%;
+  left: 13%;
+  top: 25%;
+}
+
+#main-slogan {
+  position: absolute;
+  top: 30%;
+  right: 23%;
+  font-size: 2em;
+  text-shadow: 2px 2px 2px 2px white;
+}
+
+#slogan-details {
+  position: absolute;
+  top: 40%;
+  right: 13%;
+  font-size: 1em;
+}
+
+#slogan-details p {
+  text-shadow: 1px 1px 1px 1px white;
+}
+
+#main-btn {
+  border: none;
+  background-color: yellow;
+  padding: 5px 10px;
+  float: right;
+  margin: 5px;
+  cursor: pointer;
+}
