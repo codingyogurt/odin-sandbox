@@ -6,11 +6,29 @@
   font-family: "Cabin", sans-serif;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 a {
   text-decoration: none;
   color: #333;
 }
 
+button {
+  border: none;
+  background-color: yellow;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* Nav bar */
 #nav {
   overflow: hidden;
   padding: 16px 20px;
@@ -45,6 +63,7 @@ a {
 /* Home UI */
 
 #home-img {
+  animation: 1s ease-out 0s 1 fadeIn;
   position: absolute;
   width: 40%;
   left: 13%;
@@ -52,6 +71,7 @@ a {
 }
 
 #main-slogan {
+  animation: 1s ease-out 0s 1 fadeIn;
   position: absolute;
   top: 30%;
   right: 23%;
@@ -60,6 +80,7 @@ a {
 }
 
 #slogan-details {
+  animation: 1s ease-out 0s 1 fadeIn;
   position: absolute;
   top: 40%;
   right: 13%;
@@ -71,10 +92,45 @@ a {
 }
 
 #main-btn {
-  border: none;
-  background-color: yellow;
-  padding: 5px 10px;
   float: right;
-  margin: 5px;
+}
+
+/* Menu UI */
+
+#menu-container {
+  width: 80%;
+  margin: 5% 15%;
+  display: flex;
+}
+
+.menu-item-img {
+  animation: 1s ease-out 0s 1 fadeIn;
+  width: 60%;
+  min-width: 100px;
+  min-height: 300px;
   cursor: pointer;
+  transition: opacity ease 1s;
+}
+
+.menu-item-img:hover {
+  opacity: 70%;
+}
+
+/* About UI */
+
+#about-container {
+  animation: 1s ease-out 0s 1 fadeIn;
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+  text-align: center;
+}
+
+#about-main-text {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+#about-simple-text {
+  margin-bottom: 5px;
 }
