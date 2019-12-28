@@ -1,0 +1,65 @@
+#EventPubSub *
+
+event (Object)
+Properties:
+- Event Name
+- Function Code
+
+eventManager (Module)
+Properties:
+- eventsCollection , contains all events registered
+Public Functions:
+- subscribe (eventName, eventFunction) , adds an event to eventsCollection
+- publish (eventName, dataToPass) , finds event in the collection and fires it 
+
+
+#View Functions
+
+app (Module) *
+Public Function:
+- init , initialize all listeners and loads data
+- addListeners , add listeners to DOM elements
+-- addProjectListener, collects data from form create projectObj, publish ("add-project", projectObj)
+-- deleteProjectListener, gets the title of the project, publish("delete-project", title)
+-- editProjectListener, collects data from form create projectObj, publish ("edit-project", projectObj)
+-- addTodoBtnListener, collects data from form create todoObj, publish("add-todo", todoObj)
+-- deleteTodoBtnListener, gets title of the todo, publish ("delete-todo", title)
+-- editATodoBtnListener, collects data from the form and create a todoObj, publish ("edit-todo", todoObj)
+-- clickAProjectBtnListener, publish("active-project", projectTitle)
+
+viewDataManager (Module) *
+Public Functions:
+- viewProjects(projectCollection) , remove elements in projects, loads projects in the projects view, subscribe ("project-data", viewProjects(projectCollection))
+- viewTodos(todos) , remove elements in todos,loads todos in the todolist view based on the project, subscribe ("todo-data", viewTodos(todos)).
+
+
+#Core Functions
+
+dataManager (Module) *
+Properties:
+- projectCollection , contains 1 default project containing all todos that is not in a project
+- activeProject = default, records what project is currently active
+Public Functions:
+- setActiveProject(projectTitle), set the activeProject, loadProjects(), loadTodos(), subscribe ("active-project", setActiveProject(projectTitle))
+- init , calls functions that are necessary at startup
+- loadProjects , gets projects in the collection and publish("project-data", projectCollection)
+- loadTodos , get todos based on activeProject and publish ("todo-data", todos)
+- addProject(projectObj), addProject to projectCollection, setActiveProject(projectObj.title), subscribe("add-project", addProject(projectObj))
+- deleteProject(title), delete a project based on title, setActiveProject(title), subscribe("delete-project", deleteProject(title))
+- editProject(projectObj), deleteProject(projectObj.title), addProject(projectObj), setActiveProject(projectObj.title)
+- addTodo(todoObj) , adds todo to the activeProject, subscribe ("add-todo", addTodo(todoObj)) , loadTodos()
+- deleteTodo(title), deletes a todo on the activeProject based on title, subscribe("delete-todo", deleteTodo(title)), loadTodos()
+- editTodo(todoObj), deleteTodo(todoObj.title), addTodo(todoObj), subscribe("edit-todo", editTodo(todoObj)), loadTodos()
+
+todoFactory (Object) *
+Properties:
+- Title
+- Description
+- Due Date
+- Priority Level
+- Project
+
+projectFactory (Object) *
+Properties:
+- Title
+- Todos collections
