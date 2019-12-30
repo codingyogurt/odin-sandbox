@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo App - RyeCoder</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script
+      src="https://kit.fontawesome.com/a0a1699ca0.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="nav-bar">
+      <p>TODO APP</p>
+    </div>
+    <div id="container">
+      <!-- left side bar -->
+      <div id="side-bar">
+        <div class="divider-title">
+          <p>Projects</p>
+        </div>
+        <div class="divider-item">
+          <i class="fas fa-project-diagram"></i>
+          <p>Project 1</p>
+          <p class="todo-num">(1)</p>
+        </div>
+        <div class="divider-item">
+          <i class="fas fa-project-diagram"></i>
+          <p>Project 2</p>
+          <p class="todo-num">(1)</p>
+        </div>
+        <div class="divider-item" id="add-prj-btn">
+          <i class="fas fa-plus"></i>
+          <p>Add Project</p>
+        </div>
+      </div>
+      <!-- middle bar -->
+      <div id="main-bar"></div>
+      <!-- details bar -->
+      <div id="details-bar"></div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
