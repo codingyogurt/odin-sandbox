@@ -8,93 +8,265 @@
 
 body,
 html {
-  background-color: #333;
+  background-color: rgb(61, 61, 61);
   color: #fff;
   width: 100%;
   height: 100%;
 }
 
-#nav-bar {
+/* side bar */
+
+#side-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background-color: #333;
+}
+
+#logo {
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 10px;
   height: 50px;
+  box-shadow: -1px -1px 4px 1px black;
+}
+
+#logo i {
+  font-size: 21px;
+  margin-right: 15px;
+  margin-left: 13px;
+  line-height: 48px;
+  float: left;
+}
+
+#project-list {
+  margin-top: 10px;
   width: 100%;
-  background-color: #222;
   overflow: hidden;
 }
 
-#nav-bar p {
-  font-size: 1.7em;
-  margin-top: 5px;
+#project-list .active {
+  background-color: rgb(80, 80, 80);
+}
+
+#project-title {
+  display: flex;
+  margin-left: 10px;
+  padding-left: 5px;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+#project-title button {
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  right: 0;
+  position: absolute;
+  line-height: 20px;
+  margin-right: 15px;
+}
+
+.project-item:hover {
+  background-color: rgb(61, 61, 61);
+}
+
+.project-item:hover button {
+  display: unset;
+}
+
+.project-item {
+  display: flex;
+  padding: 10px 5px;
+  border-radius: 5px;
+  margin: 3px 10px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.project-item p:last-of-type {
+  opacity: 70%;
   margin-left: 10px;
 }
+
+.project-item button {
+  border: none;
+  background: none;
+  width: 20px;
+  cursor: pointer;
+  color: #fff;
+  float: right;
+  display: none;
+}
+
+.project-item button:hover {
+  background: rgb(51, 48, 48);
+  border-radius: 2px;
+}
+
+/* nav bar */
+
+#nav-bar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 50px;
+  background-color: rgb(61, 61, 61);
+  width: 80%;
+  box-shadow: 3px -1px 4px 1px black;
+}
+
+#title {
+  padding-left: 10px;
+  padding-top: 6px;
+  font-size: 10px;
+  line-height: 35px;
+}
+
+#title i {
+  font-size: 16px;
+  margin-right: 10px;
+  margin-left: 13px;
+  line-height: 35px;
+  float: left;
+}
+
+#title h2 {
+  float: left;
+}
+
+/* container */
 
 #container {
+  width: 80%;
   height: 95%;
-  width: 95%;
-  margin: auto;
-  margin-top: 10px;
+  float: right;
+  margin-top: 50px;
   display: flex;
+  color: #333;
 }
 
-/* right side bar */
-#side-bar {
-  width: 20%;
-  height: 100%;
-  margin: auto;
-  margin-right: 10px;
-}
+/* left  */
 
-.divider-title {
-  margin-bottom: 10px;
-  padding: 5px;
-  border-bottom: rgba(242, 242, 242, 0.2) solid 1.5px;
-}
-
-.divider-item {
-  /* margin: 10px; */
-  padding: 5px;
-  display: flex;
-  cursor: pointer;
-  position: relative;
-  transition: all ease 0.3s;
-}
-
-.divider-item:hover {
-  background-color: rgba(242, 242, 242, 0.2);
-}
-
-.divider-item p {
-  margin-left: 10px;
-}
-
-.divider-item .todo-num {
-  color: #f3f3f3;
-  opacity: 60%;
-  margin-left: 5px;
-  font-size: 0.8em;
-}
-
-#add-prj-btn {
-  padding-left: 20px;
-  padding-top: 5px;
-}
-
-/* main bar */
-
-#main-bar {
-  width: 40%;
-  height: 100%;
-  margin: auto;
-  background-color: #f3f3f3;
-  margin-right: 10px;
-  border-radius: 5px 5px 0px 0px;
-}
-
-/* details bar */
-
-#details-bar {
+#left {
+  background-color: white;
+  border-radius: 4px;
+  margin: 20px;
   width: 50%;
   height: 100%;
+}
+
+#todo-form p {
+  font-size: 1.5em;
+  margin: 20px 20px 0px 20px;
+}
+
+#todo-form form {
+  margin: 0px 20px;
+}
+
+#todo-form input {
+  width: 85%;
+  padding: 5px;
+}
+
+#todo-form button {
+  cursor: pointer;
+  font-size: 22px;
+  border: none;
+  background: none;
+  padding: 10px;
+}
+
+#todo-list {
+  margin-top: 20px;
+}
+
+#todo-list .active {
+  background-color: rgba(61, 61, 61, 0.3);
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: solid 1px rgba(61, 61, 61, 0.3);
+  margin: 0px 20px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.todo-item:hover {
+  background-color: rgba(61, 61, 61, 0.1);
+}
+
+.todo-item input {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.todo-item p:last-child {
+  opacity: 70%;
+  font-size: 0.7em;
+  margin-left: 20px;
+}
+
+/* right  */
+
+#right {
+  background-color: white;
+  border-radius: 4px;
+  margin: 20px 20px 20px 0px;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#todo-option {
+  width: 92%;
+  display: flex;
+  margin: 20px;
+  padding-bottom: 20px;
+  font-size: 1.1em;
+  justify-content: space-between;
+  border-bottom: solid 1px rgba(61, 61, 61, 0.3);
+}
+
+#todo-option input {
+  width: 20px;
+  height: 20px;
+  margin: 0px 10px;
+  margin-top: 3px;
+}
+
+#todo-option button {
+  border: none;
+  background: rgb(51, 48, 48);
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#todo-content {
+  width: 92%;
   margin: auto;
-  background-color: #f3f3f3;
-  border-radius: 5px 5px 0px 0px;
+}
+
+#todo-content input {
+  display: block;
+  border: none;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#todo-content textarea {
+  width: 100%;
+  border: none;
+  resize: none;
 }
