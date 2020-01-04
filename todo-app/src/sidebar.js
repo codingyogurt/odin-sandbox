@@ -2,8 +2,14 @@ const sidebar = (() => {
   const sidebarElement = document.createElement("div");
   sidebarElement.id = "side-bar";
 
+  // project list element
+  const projectListElement = document.createElement("div");
+  projectListElement.id = "project-list";
+
   // load the header elements
   const load = projectList => {
+    // clear sidebar element
+    sidebarElement.innerHTML = "";
     // logo element
     const logo = document.createElement("div");
     logo.id = "logo";
@@ -15,15 +21,18 @@ const sidebar = (() => {
     logo.appendChild(i);
     logo.appendChild(h1);
 
+    loadProjects(projectList);
+
     sidebarElement.appendChild(logo);
-    // project list element
-    sidebarElement.appendChild(loadProjects(projectList));
+    sidebarElement.appendChild(projectListElement);
+
+    return sidebarElement;
   };
 
-  // load the items elements
+  // load the items elements returns the element itself
   const loadProjects = projectList => {
-    const projectListElement = document.createElement("div");
-    projectListElement.id = "project-list";
+    // clear projectListElement
+    projectListElement.innerHTML = "";
     // project title element
     const projectTitle = document.createElement("div");
     projectTitle.id = "project-title";
@@ -36,6 +45,8 @@ const sidebar = (() => {
     buttonTitle.id = "add-prj";
     buttonTitle.className = "fas fa-plus";
     projectTitle.appendChild(buttonTitle);
+
+    projectListElement.appendChild(projectTitle);
 
     // projects items
     projectList.forEach(project => {
@@ -56,8 +67,6 @@ const sidebar = (() => {
       // append one by one to project list element
       projectListElement.appendChild(projectItem);
     });
-
-    return projectListElement;
   };
 
   return { load, loadProjects };

@@ -1,8 +1,8 @@
 import { eventManager as events } from "./eventpubsub";
 
 // todo item object factory
-const todoFactory = (title, desc, due, prior, project) => {
-  return { title, desc, due, prior, project };
+const todoFactory = (title, desc, date, prior = false, done = false) => {
+  return { title, desc, date, prior, done };
 };
 
 // todo project object factory
@@ -14,6 +14,37 @@ const data = (() => {
   let projectCollection = [];
   let activeProject;
 
+  // sample data
+  const date = new Date();
+  const todo1 = todoFactory(
+    "Feed the cat sample",
+    "Feed the cat tonight sample",
+    date.getDate(),
+    false,
+    true
+  );
+  const todo2 = todoFactory(
+    "Feed the cat sample1",
+    "Feed the cat tonight sample1",
+    date.getDate(),
+    false
+  );
+  const prj1 = projectFactory("Default Project", [todo1, todo2]);
+
+  projectCollection.push(prj1);
+  activeProject = projectCollection[0];
+
+  // initializes all subscribers
+  const init = () => {
+    events.subscribe("activate-project", setActiveProject);
+    events.subscribe("add-project", addProject);
+    events.subscribe("delete-project", delProject);
+    events.subscribe("edit-project", editProject);
+    events.subscribe("add-todo", addTodo);
+    events.subscribe("delete-todo", delTodo);
+    events.subscribe("edit-todo", editTodo);
+  };
+
   const setActiveProject = prjTitle => {
     // find project object in the collections and set as active
     for (let key in projectCollection) {
@@ -21,16 +52,11 @@ const data = (() => {
         activeProject = projectCollection[key];
       }
     }
+
     // load projects
     loadProjects();
     // load todos
     loadTodos();
-
-    events.subscribe("activate-project", setActiveProject);
-  };
-
-  const init = () => {
-    // calls necessary functions
   };
 
   const loadProjects = () => {
@@ -44,7 +70,6 @@ const data = (() => {
   const addProject = prjObj => {
     projectCollection.push(prjObj);
     setActiveProject(prjObj.title);
-    events.subscribe("add-project", addProject);
   };
 
   const delProject = prjTitle => {
@@ -55,20 +80,17 @@ const data = (() => {
     }
     // set back to default project
     setActiveProject(projectCollection[0]);
-    events.subscribe("delete-project", delProject);
   };
 
   const editProject = prjObj => {
     delProject(prjObj.title);
     addProject(prjObj);
     setActiveProject(prjObj.title);
-    events.subscribe("edit-project", editProject);
   };
 
   const addTodo = todoObj => {
     activeProject.todos.push(todoObj);
     loadTodos();
-    events.subscribe("add-todo", addTodo);
   };
 
   const delTodo = todoTitle => {
@@ -78,13 +100,15 @@ const data = (() => {
       }
     }
     loadTodos();
-    events.subscribe("delete-todo", delTodo);
   };
 
   const editTodo = todoObj => {
     delTodo(todoObj.title);
     addTodo(todoObj);
     loadTodos();
-    subscribe("edit-todo", editTodo);
   };
+
+  return { init };
 })();
+
+export default data;
