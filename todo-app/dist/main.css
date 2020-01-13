@@ -92,6 +92,10 @@ html {
   margin-left: 10px;
 }
 
+.project-item:hover p:last-of-type{
+  display: none;
+}
+
 .project-item button {
   border: none;
   background: none;
@@ -100,6 +104,7 @@ html {
   color: #fff;
   float: right;
   display: none;
+  color: red;
 }
 
 .project-item button:hover {

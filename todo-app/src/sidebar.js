@@ -1,3 +1,5 @@
+import {eventManager as events} from "./eventpubsub"
+
 const sidebar = (() => {
   const sidebarElement = document.createElement("div");
   sidebarElement.id = "side-bar";
@@ -52,6 +54,7 @@ const sidebar = (() => {
     projectList.forEach(project => {
       const projectItem = document.createElement("div");
       projectItem.className = "project-item";
+      projectItem.setAttribute("data-index",projectList.indexOf(project));
 
       const p = document.createElement("p");
       p.textContent = project.title;
@@ -66,6 +69,9 @@ const sidebar = (() => {
       projectItem.appendChild(button);
       // append one by one to project list element
       projectListElement.appendChild(projectItem);
+
+      // adding event listener to this item passed the element
+      events.publish("add-event-prj", {projectItem:projectItem, projectList:projectList});
     });
   };
 

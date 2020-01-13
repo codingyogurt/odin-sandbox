@@ -1,4 +1,5 @@
 import { eventManager as events } from "./eventpubsub";
+import {format} from "date-fns";
 
 // todo item object factory
 const todoFactory = (title, desc, date, prior = false, done = false) => {
@@ -15,23 +16,33 @@ const data = (() => {
   let activeProject;
 
   // sample data
-  const date = new Date();
+  const d = format(new Date(), "MMMM dd, yyyy");
   const todo1 = todoFactory(
     "Feed the cat sample",
     "Feed the cat tonight sample",
-    date.getDate(),
+    d,
     false,
     true
   );
   const todo2 = todoFactory(
     "Feed the cat sample1",
     "Feed the cat tonight sample1",
-    date.getDate(),
+    d,
     false
   );
+  const todo3 = todoFactory(
+    "Done with activating a Todo",
+    "Not that simple",
+    d,
+    false
+  )
+
   const prj1 = projectFactory("Default Project", [todo1, todo2]);
+  const prj2 = projectFactory("Project 1", [todo1, todo2, todo3]);
+  
 
   projectCollection.push(prj1);
+  projectCollection.push(prj2);
   activeProject = projectCollection[0];
 
   // initializes all subscribers

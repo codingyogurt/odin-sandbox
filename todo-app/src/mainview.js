@@ -42,6 +42,7 @@ const mainView = (() => {
 
     // append to container
     container.appendChild(left);
+    return left;
   };
 
   // function for creating todo items in the list based on the current project selected
@@ -133,6 +134,8 @@ const mainView = (() => {
 
     // append right to container
     container.appendChild(right);
+
+    return right;
   };
 
   // load todoItem details to the elements
@@ -151,7 +154,7 @@ const mainView = (() => {
     return container;
   };
 
-  return { load, loadRightContents };
+  return { load, loadLeft, loadRight, loadRightContents };
 })();
 
 export default mainView;
